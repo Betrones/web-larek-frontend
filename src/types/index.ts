@@ -8,20 +8,26 @@ export interface ICard {
   inCart?: boolean // Отслеживание для блокировки кнопки в модальном окне preview карточки
 }
 
-export interface IGallery {
-  gallery: ICard[],
-  preview: string | null
-}
-
-// export interface IBasket {
-//   cart: ICard[]
-// }
-
 export interface ICustomer {
   payMethod: 'cash' | 'card',
   address: string,
   phone: string,
   email: string
+}
+
+export interface ICardsData {
+  gallery: ICard[],
+  preview: string | null,
+  addCard(card: ICard): void,
+  getCard(cardId: string): ICard,
+  addToCart(card: ICard): void,
+  removeFromCart(cardId: string): void
+}
+
+export interface ICustomerData {
+  getCustomerData(): ICustomer,
+  setCustomerData(data: ICustomer): void,
+  checkValidation(data: Record<keyof ICustomer, string>): boolean
 }
 
 export type TGalleryCard = Pick<ICard, 'title' | 'category' | 'price' | 'image'> // Тип для карточки в галерее
